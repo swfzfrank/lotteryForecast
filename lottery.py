@@ -36,7 +36,7 @@ def fetch_ssq_data(page_no=1, page_size=30):
 
 def fetch_ssq_all_data(max=64):
     all_data = []
-    for page in range(2, max):
+    for page in range(1, max):
         data = fetch_ssq_data(page_no=page)
         if data is None:
             break
