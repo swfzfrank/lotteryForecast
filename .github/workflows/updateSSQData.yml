@@ -3,7 +3,7 @@ name: Python application
 on:
   workflow_dispatch:
   schedule:
-    - cron: '00 00 * * *'  
+    - cron: '0 0 * * 1,3,5'  # 每周一、三、五的 00:00 执行
 
 permissions:
   contents: write  # 授予写入权限
