@@ -41,6 +41,11 @@ jobs:
       run: |
         git config --global user.name "swfzfrank"
         git config --global user.email "swfzfrank@hotmail.com"
+    - name: Debug Info
+      run: |
+        echo "仓库地址: https://github.com/${GITHUB_REPOSITORY}.git"
+        echo "当前分支: ${GITHUB_REF}"
+        git remote -v
     - name: Commit and Push
       env:
         # 使用保存的Token（MY_PAT是步骤1中设置的Secret名称）
