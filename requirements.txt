@@ -4,5 +4,3 @@ matplotlib
 openpyxl
 tensorflow
 scikit-learn
-random
-numpy
