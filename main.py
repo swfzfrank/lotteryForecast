@@ -73,8 +73,10 @@ def predictBlueNumber():
 def predictRedNumber():
     red = dataProcess.sort_and_extract_red(lotteryData.get_history_ssq_data())
     data = red[day::3]
+    redNumberForecast.trainRedNumberModel(data, length)
 
-    return redNumberForecast.getFutureRedNumbers(data)
+    testNumber = data[-length:]  # 获取最后length个元素
+    return redNumberForecast.predictNextRedNumbers(testNumber)
 
 if __name__ == "__main__":
     if lotteryData.get_history_ssq_data().empty:
