@@ -1,12 +1,15 @@
 import requests
 
-def send_wxpusher_message(content, uids, app_token, topicIds, title=None):
+APP_TOKEN = "AT_PWwDFvgL1pymLhqCtuZfmLoPzKZgPOf1"
+USER_UIDS = ["UID_wKraNNh5OPgSq2kP0neChHsNC3"]
+
+def send_wxpusher_message(content, topicIds, title=None):
     url = "https://wxpusher.zjiecode.com/api/send/message"
     headers = {"Content-Type": "application/json"}
     data = {
-        "appToken": app_token,
+        "appToken": APP_TOKEN,
         "content": content,
-        "uids": uids,  # 关键修复：字段名从 "uid" 改为 "uids"
+        "uids": USER_UIDS,  # 关键修复：字段名从 "uid" 改为 "uids"
         "topicIds": topicIds,
         "summary": title,  # 关键字段：设置标题（显示在消息通知栏）
         "contentType": 1,

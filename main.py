@@ -4,9 +4,10 @@ from blueNumberForecast import SequencePredictor
 from blueTrendForecast import SequenceClassifier
 import redNumberForecast
 import wxPusher
+import pandas as pd
+from datetime import datetime
+import os
 
-APP_TOKEN = "AT_PWwDFvgL1pymLhqCtuZfmLoPzKZgPOf1"  # 双色球专用 APP_TOKEN
-USER_UIDS = ["UID_wKraNNh5OPgSq2kP0neChHsNC3Sd"]
 def get_weekday():
     """
     返回今天是星期几，若是星期一则返回0，星期三返回1，星期六返回2。
@@ -19,11 +20,11 @@ def get_weekday():
     today = datetime.today().weekday()
     
     # 根据星期几返回相应的数字
-    if today == 0:  # 星期一
+    if today == 1:  # 星期二
         return 0
-    elif today == 2:  # 星期三
+    elif today == 3:  # 星期四
         return 1
-    elif today == 4:  # 星期五
+    elif today == 6:  # 星期日
         return 2
     else:
         return None  # 其他情况返回None
@@ -91,4 +92,25 @@ if __name__ == "__main__":
     combined_balls = f"Blue Balls: {blueBalls} \n Red Balls: {redBalls}"
     print(combined_balls)
     
-    wxPusher.send_wxpusher_message(combined_balls, USER_UIDS, APP_TOKEN, [39909], "今日预测")
+    wxPusher.send_wxpusher_message(combined_balls, [39909], "今日预测")
+    
+    # 新增：将预测结果保存到 DataFrame 中
+    today = datetime.now().strftime("%Y-%m-%d")
+    data = {
+        "Date": [today],
+        "Blue Balls": [blueBalls],
+        "Red Balls": [redBalls],
+        "Prize": "",
+    }
+    df = pd.DataFrame(data)
+    
+    csv_file_path = "lottery_predictions.csv"
+    if os.path.exists(csv_file_path):
+        # 读取现有数据并合并
+        existing_df = pd.read_csv(csv_file_path, index_col=0)
+        combined_df = pd.concat([df, existing_df])  # 新数据在前
+    else:
+        combined_df = df
+
+    # 覆盖写入完整数据
+    combined_df.to_csv(csv_file_path, mode='w', header=True, index=True)
