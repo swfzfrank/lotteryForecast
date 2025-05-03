@@ -1,4 +1,4 @@
-name: Python application
+name: updateSSQData
 
 on:
   workflow_dispatch:
