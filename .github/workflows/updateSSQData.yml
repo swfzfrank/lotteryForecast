@@ -3,7 +3,7 @@ name: updateSSQData
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * 2,4,7'  # 每周二、四、日的 00:00 执行
+    - cron: '0 0 * * 0,2,4'  # 每周二、四、日的 00:00 执行
 
 permissions:
   contents: write  # 授予写入权限
