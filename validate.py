@@ -63,7 +63,7 @@ if __name__ == '__main__':
     predictBlue = string_to_list(df.iloc[0]['Blue Balls'])
     predictRed = string_to_list(df.iloc[0]['Red Balls'])
     prize = getPrize(latestBlue, latestRed, predictBlue, predictRed)
-    df.iloc[0]['Prize'] = prize
+    df.at[df.index[0], 'Prize'] = str(prize)
     df.to_csv("lottery_predictions.csv", index=False)
 
     code = latestData.iloc[0]['code']
