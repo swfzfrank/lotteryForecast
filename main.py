@@ -92,7 +92,7 @@ if __name__ == "__main__":
     combined_balls = f"Blue Balls: {blueBalls} \n Red Balls: {redBalls}"
     print(combined_balls)
     
-    wxPusher.send_wxpusher_message(combined_balls, [39909], "今日预测")
+    # wxPusher.send_wxpusher_message(combined_balls, [39909], "今日预测")
     
     # 新增：将预测结果保存到 DataFrame 中
     today = datetime.now().strftime("%Y-%m-%d")
